@@ -13,6 +13,15 @@ app.set('view engine', 'handlebars');
 
 app.get('/', (req, res) => res.render('home'));
 
+var fortune = require('./lib/fortune');
+//usa modulos de la libreria fortune.js
+app.get('/about',function(req,res){
+  res.render('about', { fortune: fortune.getFortune() });
+})
+
+//archivos estaticos
+app.use(express.static(path.join(__dirname,'/public')));
+
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 
